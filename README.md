@@ -4,7 +4,7 @@ The official product landing page and documentation site for **[VGate](https://g
 
 This site is built with [VitePress](https://vitepress.dev) and is published to GitHub Pages at:
 
-> https://vgate-project.github.io/vgate-project.github.io/
+> https://vgate-project.github.io/
 
 ## Repository layout
 
@@ -35,7 +35,7 @@ npm install
 npm run docs:dev
 ```
 
-Then open http://localhost:5173/vgate-project.github.io/.
+Then open http://localhost:5173/.
 
 ## Build & preview
 
@@ -46,7 +46,7 @@ npm run docs:preview   # serve the built site locally
 
 ## Deploying to GitHub Pages
 
-The site is configured with `base: '/vgate-project.github.io/'` so it works under the
+The site is configured with `base: '/'` so it works under the
 project sub-path. Build the site and publish the contents of `docs/.vitepress/dist`:
 
 ```bash
