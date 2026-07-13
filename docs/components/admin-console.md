@@ -1,0 +1,85 @@
+# Admin Console
+
+`frontend/admin/` is the Vue 3 web UI operators use to run VGate day to day. It talks to the
+manager's REST API under `/api/v1`.
+
+## Stack
+
+Vue 3 + Vite + TypeScript, with Element Plus, Pinia, Vue Router, and Axios. Node 18+ required.
+Ships both `package-lock.json` and `pnpm-lock.yaml`, so you may use `npm` **or** `pnpm`.
+
+## Commands
+
+```bash
+cd frontend/admin
+npm install        # or: pnpm install
+npm run dev        # Vite dev server → http://localhost:5173
+npm run build      # production build → dist/
+npm run preview    # preview the build
+npm run typecheck  # vue-tsc --noEmit
+```
+
+::: info No test script
+The frontend has **no test script** (only `dev`, `build`, `preview`, `typecheck`). There is
+nothing to run with `npm test`.
+:::
+
+## What you can do
+
+- **Nodes**: create/edit proxy nodes, set their listen port, transport (`tcp`/`ws`/`xhttp`),
+  and TLS/Reality security — all delivered to the node via the manager.
+- **Users**: create users, assign plans, revoke credentials.
+- **Plans**: define purchasable plans (price, quota, duration). Gated to `super_admin`.
+- **Orders**: view and manage billing orders.
+- **Traffic**: inspect per-user and per-node usage and stats.
+- **System config**: tune hot-reloadable settings (JWT TTLs, log level/format, CORS origins,
+  timeouts) via `PUT /api/v1/admin/system-config`.
+- **Announcements**: publish notices to the user portal.
+
+## Auth behavior
+
+- The admin console uses **JWT access + refresh**. Login returns both tokens.
+- On a `401`, the Axios interceptor performs **one automatic silent refresh**, then retries.
+
+## API base URL
+
+In dev, Vite proxies `/api` → `http://localhost:8081` (the manager) to avoid CORS.
+
+At runtime the API base URL is read from `window.__ENV__.API_BASE_URL`, injected by
+`public/env.js`. `public/env.js` is copied **verbatim** to `dist/env.js` and is **not** bundled,
+so you can repoint the backend after deploy without rebuilding:
+
+- Empty string → relative `/api/v1` (same-origin / reverse-proxy).
+- Full URL → needed when the manager runs on a separate host; the manager's CORS
+  `allowed_origins` must then allow the frontend origin.
+
+## Deploying
+
+Build with `npm run build` and serve `dist/` from any static host or your reverse proxy
+alongside the manager. Edit `dist/env.js` to set `API_BASE_URL`.
+
+## Screenshots
+
+### Dashboard
+
+![Admin Dashboard](../assets/screenshots/screenshot1.jpeg)
+
+*The admin dashboard at a glance: node count, active users (24h), traffic, orders paid, new users, expiring subscriptions, quota-exhausted and unverified counts, hourly upload/download traffic chart, and live node status table.*
+
+### Nodes
+
+![Nodes](../assets/screenshots/screenshot2.jpeg)
+
+*Node management table — each row shows ID, name, type (Real/Virtual), address, parent node, transport protocol, security mode (TLS/Reality), online status, and quick actions for editing config.*
+
+### Users
+
+![Users](../assets/screenshots/screenshot3.jpeg)
+
+*User list with per-user quota, real-time usage progress bar (red = exhausted), cumulative upload/download bytes, expiry date, and edit actions.*
+
+### System Config
+
+![System Config](../assets/screenshots/screenshot4.jpeg)
+
+*System configuration panel (Users tab) — toggle self-service registration, require invite codes, and require email verification. All settings are DB-backed and applied immediately on save.*
