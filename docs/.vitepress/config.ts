@@ -68,7 +68,6 @@ export default defineConfig({
           text: 'Get Started',
           items: [
             { text: 'Quick Start', link: '/guide/getting-started' },
-            { text: 'Local Demo', link: '/guide/local-demo' },
           ],
         },
       ],
