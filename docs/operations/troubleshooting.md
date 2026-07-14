@@ -21,7 +21,7 @@ If no admins can be created (DB issue), restore from a backup or re-bootstrap wi
 
 ## Node shows as not syncing / no traffic
 
-- Confirm `admin_api` in `server/config.yml` is reachable from the node (outbound HTTPS/HTTP).
+- Confirm `admin_api` in `vgate-server/config.yml` is reachable from the node (outbound HTTPS/HTTP).
 - Confirm `node_id` / `node_token` match what the admin console issued.
 - Check the node logs at the configured `log_level`. The sync uses `If-None-Match`; a `304` is
   expected when nothing changed — that is **not** an error.
@@ -49,9 +49,7 @@ node's local `config.yml` (which only holds sync settings).
 
 ## Build fails on the server
 
-`server/go.mod` has a `replace` directive pointing at a checked-out xray-core. Ensure that local
-checkout exists, or remove the `replace` to build against the published module. Also confirm
-Go 1.26+.
+Confirm you have Go 1.26+ installed.
 
 ## Subscription link returns nothing
 

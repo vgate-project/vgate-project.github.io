@@ -1,6 +1,6 @@
 # Server (Proxy Node)
 
-The `server/` component is a Go binary (cobra CLI) that runs a single VLESS inbound proxy node.
+The `vgate-server/` component is a Go binary (cobra CLI) that runs a single VLESS inbound proxy node.
 It is a **stateless worker**: it pulls its configuration and authorized user list from the
 manager, serves proxy traffic, and reports per-user traffic back.
 
@@ -9,7 +9,7 @@ Source: [github.com/vgate-project/vgate-server](https://github.com/vgate-project
 ## Build & run
 
 ```bash
-cd server
+cd vgate-server
 go build -o vgate .                 # produces the `vgate` binary
 ./vgate --config config.yml         # run the proxy (defaults to ./config.yml)
 ```
@@ -20,16 +20,6 @@ Test & lint:
 go test ./...
 go vet ./... && gofmt -l .
 ```
-
-::: warning xray-core replace directive
-`server/go.mod` has a `replace` directive pointing at a checked-out xray-core for local
-development. Builds depend on that local checkout unless the `replace` is removed.
-:::
-
-::: info keygen subcommand?
-The README mentions a `keygen` subcommand, but the current `cmd/` only contains `root.go`. Verify
-before relying on it.
-:::
 
 ## Local config (what the node owns)
 
@@ -48,7 +38,7 @@ TLS/Reality, VLESS flows — is **delivered by the manager** and hot-reloaded.
 
 ## Runtime flow
 
-`server/main.go` → `cmd.Execute()` → `run()`:
+`vgate-server/main.go` → `cmd.Execute()` → `run()`:
 
 1. Load local viper YAML config.
 2. Create an `api.Client` pointed at `<AdminAPI>/api/v1/server`.

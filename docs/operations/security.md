@@ -60,6 +60,6 @@ Enable the `ratelimit` middleware for public endpoints — especially `/user/log
 
 ## Updates
 
-- Keep xray-core (via the server's `replace` checkout) and dependencies current for protocol and
+- Keep xray-core (the server's VLESS dependency) and dependencies current for protocol and
   CVE fixes.
 - The manager auto-migrates safely; review migration code before major version bumps.

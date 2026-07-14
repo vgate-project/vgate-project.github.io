@@ -2,7 +2,7 @@
 
 VGate splits configuration into **file/env-only** keys and **DB-backed, hot-reloadable** keys.
 
-## Manager (`manager/config.yml`)
+## Manager (`vgate-manager/config.yml`)
 
 ### File / env only
 
@@ -29,7 +29,7 @@ Changed through the API; no restart needed. Merged over the file config on start
 | `cors.allowed_origins` | Allowed frontend origins. |
 | timeouts | Request timeouts. |
 
-## Server (`server/config.yml`)
+## Server (`vgate-server/config.yml`)
 
 The node's local config holds **only** manager-connection + sync settings. All serve-side
 settings (port, transport, security, flows) come from the manager.

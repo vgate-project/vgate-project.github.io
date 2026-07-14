@@ -41,7 +41,7 @@ The server node keeps per-user delta counters, resets them on report, and posts 
 
 ### The README mentions a `keygen` subcommand — where is it?
 
-The current `server/cmd` only contains `root.go`. Verify before relying on `keygen`.
+The current `vgate-server/cmd` only contains `root.go`. Verify before relying on `keygen`.
 
 ### Can I rebrand the user portal?
 

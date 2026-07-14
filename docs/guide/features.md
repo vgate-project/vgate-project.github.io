@@ -4,7 +4,7 @@ A detailed look at what VGate provides across its four components.
 
 ## Proxy protocol & transports
 
-The VLESS inbound (`server/`) is built on top of [xray-core](https://github.com/XTLS/Xray-core)
+The VLESS inbound (`vgate-server/`) is built on top of [xray-core](https://github.com/XTLS/Xray-core)
 and supports:
 
 - **VLESS flows**

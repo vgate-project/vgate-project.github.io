@@ -44,8 +44,11 @@ export default defineConfig({
         text: 'Operations',
         items: [
           { text: 'Deployment', link: '/operations/deployment' },
+          { text: 'Releases (Pre-built)', link: '/operations/releases' },
           { text: 'Configuration Reference', link: '/operations/configuration' },
           { text: 'API Reference', link: '/operations/api' },
+          { text: 'Security', link: '/operations/security' },
+          { text: 'Troubleshooting', link: '/operations/troubleshooting' },
           { text: 'FAQ', link: '/operations/faq' },
         ],
       },
@@ -89,6 +92,7 @@ export default defineConfig({
           text: 'Operations',
           items: [
             { text: 'Deployment', link: '/operations/deployment' },
+            { text: 'Releases (Pre-built)', link: '/operations/releases' },
             { text: 'Configuration Reference', link: '/operations/configuration' },
             { text: 'API Reference', link: '/operations/api' },
             { text: 'Security', link: '/operations/security' },

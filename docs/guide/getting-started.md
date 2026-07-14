@@ -3,12 +3,20 @@
 This guide gets a minimal VGate stack running locally: a **manager**, one **server** node, and
 the **admin console**. It assumes Go 1.26+ and Node 18+.
 
+Each component lives in its own repo under [`vgate-project`](https://github.com/vgate-project):
+`vgate-manager`, `vgate-server`, `vgate-admin`, and `vgate-user`. Clone each one as you go
+below — there is no single combined repo to check out.
+
 Prefer containers? Skip to [Run with Docker](#run-with-docker) — the manager and server ship
 ready-made Dockerfiles and Compose files.
 
+Don't want to build from source at all? Every component also publishes **pre-built artifacts**
+(binaries, Docker images, and the built frontends) in its GitHub release — see
+[Releases (Pre-built)](../operations/releases).
+
 ## Run with Docker
 
-The `manager/` and `server/` components already ship Dockerfiles and `docker-compose.yml`
+The `manager` and `server` components already ship Dockerfiles and `docker-compose.yml`
 files. They connect over a shared external Docker network named `vgate`. The frontends have no
 Docker image yet, so run the admin console via npm (step 3 below) or the REST API to create nodes
 and obtain each node's `NODE_TOKEN`.
@@ -34,10 +42,12 @@ and obtain each node's `NODE_TOKEN`.
    SERVER_PORT=10086
    ```
 
-3. Bring up the manager:
+3. Clone the manager repo and bring it up:
 
    ```bash
-   docker compose -f manager/docker-compose.yml up -d
+   git clone https://github.com/vgate-project/vgate-manager.git
+   cd vgate-manager
+   docker compose up -d
    ```
 
 4. The bootstrap admin password is printed **once** — to the container logs. Grab it now:
@@ -46,16 +56,20 @@ and obtain each node's `NODE_TOKEN`.
    docker logs vgate-manager
    ```
 
-5. Start the admin console (npm) to create a node and copy its `NODE_TOKEN`:
+5. Clone the admin console repo and run it (npm) to create a node and copy its `NODE_TOKEN`:
 
    ```bash
-   cd frontend/admin && npm install && npm run dev   # http://localhost:5173
+   git clone https://github.com/vgate-project/vgate-admin.git
+   cd vgate-admin
+   npm install && npm run dev   # http://localhost:5173
    ```
 
-6. With `NODE_TOKEN` / `NODE_ID` set, bring up the proxy node:
+6. With `NODE_TOKEN` / `NODE_ID` set, clone the server repo and bring it up:
 
    ```bash
-   docker compose -f server/docker-compose.yml up -d
+   git clone https://github.com/vgate-project/vgate-server.git
+   cd vgate-server
+   docker compose up -d
    ```
 
 7. Verify the manager is healthy:
@@ -71,7 +85,9 @@ Build and run the images directly, mirroring the same environment the Compose fi
 **Manager:**
 
 ```bash
-docker build -t vgate-manager ./manager
+git clone https://github.com/vgate-project/vgate-manager.git
+cd vgate-manager
+docker build -t vgate-manager .
 docker run -d --name vgate-manager --network vgate -p 8081:8081 \
   -e SERVER_PORT=8081 \
   -e JWT_SECRET=<strong-random-secret> \
@@ -85,7 +101,9 @@ docker run -d --name vgate-manager --network vgate -p 8081:8081 \
 **Server** (after creating the node and obtaining its `NODE_TOKEN`):
 
 ```bash
-docker build -t vgate-server ./server
+git clone https://github.com/vgate-project/vgate-server.git
+cd vgate-server
+docker build -t vgate-server .
 docker run -d --name vgate-server --network vgate -p 10086:10086 \
   -e ADMIN_API=http://manager:8081 \
   -e NODE_ID=1 -e NODE_TOKEN=<NODE_TOKEN_FROM_ADMIN_CONSOLE> \
@@ -102,7 +120,8 @@ not the local `config.yml`.
 ## 1. Start the manager
 
 ```bash
-cd manager
+git clone https://github.com/vgate-project/vgate-manager.git
+cd vgate-manager
 go build -o vgate-manager .
 ./vgate-manager --config config.yml
 ```
@@ -135,7 +154,8 @@ log_level: info
 Create the node in the admin console first (it issues the `node_token`), then:
 
 ```bash
-cd server
+git clone https://github.com/vgate-project/vgate-server.git
+cd vgate-server
 go build -o vgate .
 ./vgate --config config.yml
 ```
@@ -143,16 +163,12 @@ go build -o vgate .
 The node will sync its config + users and begin serving VLESS traffic on the port assigned by
 the manager.
 
-::: tip Note on building the server
-`server/go.mod` has a `replace` directive pointing at a checked-out xray-core for local
-development. Builds depend on that local checkout unless the `replace` is removed.
-:::
-
 ## 3. Run the admin console
 
 ```bash
-cd frontend/admin
-npm install        # or: pnpm install
+git clone https://github.com/vgate-project/vgate-admin.git
+cd vgate-admin
+npm install
 npm run dev        # http://localhost:5173
 ```
 
@@ -162,8 +178,9 @@ step 1. From here you can create nodes, users, plans, and watch traffic.
 ## 4. (Optional) Run the user portal
 
 ```bash
-cd frontend/user
-npm install        # npm only — no pnpm lockfile
+git clone https://github.com/vgate-project/vgate-user.git
+cd vgate-user
+npm install
 npm run dev        # http://localhost:5174
 ```
 

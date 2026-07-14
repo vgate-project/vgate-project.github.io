@@ -27,7 +27,7 @@ VGate is a small distributed system with a clear control-plane / data-plane spli
 
 ## Manager — the control plane
 
-`manager/` is a Go service (Gin + GORM). On startup (`manager/main.go` → `cmd.Execute()` →
+`vgate-manager/` is a Go service (Gin + GORM). On startup (`vgate-manager/main.go` → `cmd.Execute()` →
 `run()`):
 
 1. Loads config (viper).
@@ -71,8 +71,8 @@ viper maps `SERVER_PORT`-style environment variables.
 
 ## Server — the data plane (proxy node)
 
-`server/` is a Go binary (cobra CLI) that runs a VLESS inbound. Flow
-(`server/main.go` → `cmd.Execute()` → `run()`):
+`vgate-server/` is a Go binary (cobra CLI) that runs a VLESS inbound. Flow
+(`vgate-server/main.go` → `cmd.Execute()` → `run()`):
 
 1. Load local viper YAML config (`admin_api`, `node_id`, `node_token`, `sync_interval`,
    `log_level`).
@@ -107,8 +107,8 @@ anonymous imports in `proxy/vless/bootstrap.go`.
 
 ## Frontends — the human interface
 
-- `frontend/admin` — operator UI. Supports `npm` or `pnpm`.
-- `frontend/user` — customer UI. `npm install` only (no `pnpm` lockfile).
+- `vgate-admin` — operator UI. Uses `npm`.
+- `vgate-user` — customer UI. `npm install`.
 
 Both talk to the manager's REST API. Dev servers proxy `/api` → `http://localhost:8081`.
 

@@ -1,20 +1,29 @@
 # Admin Console
 
-`frontend/admin/` is the Vue 3 web UI operators use to run VGate day to day. It talks to the
+`vgate-admin/` is the Vue 3 web UI operators use to run VGate day to day. It talks to the
 manager's REST API under `/api/v1`.
 
 Source: [github.com/vgate-project/vgate-admin](https://github.com/vgate-project/vgate-admin)
 
+## Pre-built (no build)
+
+The admin console is also published as a **ready-built SPA** in the
+[vgate-admin releases](https://github.com/vgate-project/vgate-admin/releases). Download
+`dist.tar.gz` / `dist.zip`, extract it into a `dist/` directory, then edit `dist/env.js` to set
+`window.__ENV__.API_BASE_URL` to your manager's API origin (empty `''` for same-origin behind a
+reverse proxy), and serve the folder statically. No `npm install` / `npm run build` required. See
+[Releases (Pre-built)](/operations/releases) for the full steps.
+
 ## Stack
 
 Vue 3 + Vite + TypeScript, with Element Plus, Pinia, Vue Router, and Axios. Node 18+ required.
-Ships both `package-lock.json` and `pnpm-lock.yaml`, so you may use `npm` **or** `pnpm`.
+Ships `package-lock.json`; use `npm`.
 
 ## Commands
 
 ```bash
-cd frontend/admin
-npm install        # or: pnpm install
+cd vgate-admin
+npm install
 npm run dev        # Vite dev server → http://localhost:5173
 npm run build      # production build → dist/
 npm run preview    # preview the build

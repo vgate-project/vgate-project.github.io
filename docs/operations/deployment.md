@@ -4,6 +4,10 @@ A production VGate deployment is: **one manager** (with a database), **one or mo
 and the **two frontends** served as static assets — typically all behind a single reverse proxy
 for TLS.
 
+Want to skip building from source? Every component ships **pre-built artifacts** (binaries, Docker
+images, and the built frontends) in its GitHub release — see
+[Releases (Pre-built)](./releases) to download and run directly.
+
 ## Topology
 
 ```text
@@ -25,10 +29,14 @@ for TLS.
 ## 1. Manager
 
 ```bash
-cd manager
+cd vgate-manager
 go build -o vgate-manager .
 ./vgate-manager --config /etc/vgate/manager.yml
 ```
+
+**Pre-built?** Download `vgate-manager-<os>-<arch>.tar.gz` (or `.zip`) from the
+[vgate-manager releases](https://github.com/vgate-project/vgate-manager/releases), or pull the
+image `ghcr.io/vgate-project/vgate-manager` — see [Releases (Pre-built)](./releases).
 
 - Use Postgres in production (`db.dialect: postgres`, `db.dsn: "..."`).
 - Set a strong `jwt.secret`.
@@ -41,10 +49,14 @@ go build -o vgate-manager .
 On each proxy host:
 
 ```bash
-cd server
+cd vgate-server
 go build -o vgate .
 ./vgate --config /etc/vgate/server.yml
 ```
+
+**Pre-built?** Download `vgate-server-<os>-<arch>.tar.gz` (or `.zip`) from the
+[vgate-server releases](https://github.com/vgate-project/vgate-server/releases), or pull the image
+`ghcr.io/vgate-project/vgate-server` — see [Releases (Pre-built)](./releases).
 
 `server.yml` contains only `admin_api`, `node_id`, `node_token`, `sync_interval`, `log_level`.
 Firewall the VLESS listen port (assigned by the manager) for client access; the manager connection
@@ -69,14 +81,24 @@ WantedBy=multi-user.target
 
 ## 3. Frontends
 
-Build both and serve `dist/` statically (or via the reverse proxy):
+**Pre-built (recommended):** download the built SPA archive (`dist.tar.gz` / `dist.zip`) from the
+[vgate-admin](https://github.com/vgate-project/vgate-admin/releases) and
+[vgate-user](https://github.com/vgate-project/vgate-user/releases) releases, extract it into a
+`dist/` directory, then edit `dist/env.js` to point at your manager (see
+[Releases (Pre-built)](./releases) for the full steps). No `npm install` / `npm run build` needed.
+
+To build from source instead:
 
 ```bash
-cd frontend/admin && npm install && npm run build
-cd ../user   && npm install && npm run build
+git clone https://github.com/vgate-project/vgate-admin.git
+cd vgate-admin && npm install && npm run build
+
+git clone https://github.com/vgate-project/vgate-user.git
+cd vgate-user && npm install && npm run build
 ```
 
-After building, edit each `dist/env.js` to set `window.__ENV__.API_BASE_URL`:
+After building (or after extracting the pre-built archive), edit each `dist/env.js` to set
+`window.__ENV__.API_BASE_URL`:
 
 - Same-origin (proxy serves `/api`): leave empty `''`.
 - Separate manager host: set the full URL and allow the frontend origin in the manager's CORS
@@ -98,9 +120,12 @@ example.com {
 
 The manager runs these automatically — no external scheduler needed:
 
-- Expired-order closer: every **5 minutes**.
-- Traffic aggregation: **hourly**.
-- Daily quota reset: **daily**.
+- Expired-order closer: every **5 minutes** (flips unpaid orders to closed).
+- Hourly stats pruning: once at startup, then every **24 hours** (deletes
+  `traffic_hourly_stat` rows older than 48h). Hourly traffic is aggregated as nodes
+  report it, not on a schedule.
+- Quota reset: once at startup, then every **24 hours** (resets usage counters on
+  the configured `quota.reset_day`).
 
 ## Upgrades
 

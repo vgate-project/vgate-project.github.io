@@ -61,7 +61,7 @@ POST /api/v1/admin/plans                             # create plan (super_admin)
 GET  /api/v1/admin/admins                            # list admins (super_admin)
 ```
 
-Exact request/response shapes live in `manager/internal/api/dto/`. The repo's `api/` tests
+Exact request/response shapes live in `vgate-manager/internal/api/dto/`. The repo's `api/` tests
 (`admin_test.go`, `server_test.go`, `sub_test.go`, auth-level tests) are the most reliable
 contract reference.
 

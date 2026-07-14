@@ -1,6 +1,6 @@
 # Manager (Backend API)
 
-The `manager/` component is the control plane: a Go service (Gin + GORM) that owns users, nodes,
+The `vgate-manager/` component is the control plane: a Go service (Gin + GORM) that owns users, nodes,
 plans, orders, traffic, and system config, and exposes both the human-facing REST API and the
 node data plane.
 
@@ -9,7 +9,7 @@ Source: [github.com/vgate-project/vgate-manager](https://github.com/vgate-projec
 ## Build & run
 
 ```bash
-cd manager
+cd vgate-manager
 go build -o vgate-manager .
 ./vgate-manager --config config.yml     # defaults to ./config.yml; HTTP on server.port (8081)
 ```

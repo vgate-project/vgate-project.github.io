@@ -1,21 +1,30 @@
 # User Portal
 
-`frontend/user/` is the Vue 3 web UI your **customers** use: they log in, manage their profile,
+`vgate-user/` is the Vue 3 web UI your **customers** use: they log in, manage their profile,
 subscribe to plans, and view their subscription and usage. It talks to the manager's REST API
 under `/api/v1`.
 
 Source: [github.com/vgate-project/vgate-user](https://github.com/vgate-project/vgate-user)
 
+## Pre-built (no build)
+
+The user portal is also published as a **ready-built SPA** in the
+[vgate-user releases](https://github.com/vgate-project/vgate-user/releases). Download
+`dist.tar.gz` / `dist.zip`, extract it into a `dist/` directory, then edit `dist/env.js` to set
+`window.__ENV__.API_BASE_URL` to your manager's API origin (empty `''` for same-origin behind a
+reverse proxy), and serve the folder statically. No `npm install` / `npm run build` required. See
+[Releases (Pre-built)](/operations/releases) for the full steps.
+
 ## Stack
 
 Vue 3 + Vite + TypeScript, with Element Plus, Pinia, Vue Router, and Axios. Node 18+ required.
-Ships `package-lock.json` only — use **`npm install`** (no `pnpm`).
+Ships `package-lock.json`; use **`npm install`**.
 
 ## Commands
 
 ```bash
-cd frontend/user
-npm install        # npm only
+cd vgate-user
+npm install
 npm run dev        # Vite dev server → http://localhost:5174
 npm run build      # production build → dist/
 npm run preview    # preview the build
@@ -33,7 +42,7 @@ As with the admin console, there is **no test script** for the user frontend.
 - **Cloudflare Turnstile.** Login supports a `cf_turnstile_response` field for bot protection.
 - **Email verification.** There is a `/verify-email` flow.
 
-See `frontend/user/README.md` for the full route list and details.
+See `vgate-user/README.md` for the full route list and details.
 
 ## What users can do
 

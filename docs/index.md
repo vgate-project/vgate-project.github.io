@@ -101,14 +101,23 @@ traffic?"*. VGate collapses all of that into one coherent system you host yourse
 ## Start in minutes
 
 ```bash
-# 1. Start the manager (auto-migrates the DB and prints the admin password once)
-cd manager && go build -o vgate-manager . && ./vgate-manager --config config.yml
+# 1. Clone + start the manager (auto-migrates the DB and prints the admin password once)
+git clone https://github.com/vgate-project/vgate-manager.git
+cd vgate-manager && go build -o vgate-manager . && ./vgate-manager --config config.yml
 
-# 2. Point a proxy node at it
-cd server && go build -o vgate . && ./vgate --config config.yml
+# 2. Point a proxy node at it (its own repo)
+git clone https://github.com/vgate-project/vgate-server.git
+cd vgate-server && go build -o vgate . && ./vgate --config config.yml
 
 # 3. Open the admin console and create your first node + user
 ```
+
+::: tip Don't want to build from source?
+Every component is also published as a **pre-built artifact** — binaries, Docker images, and the
+built frontends — in its [GitHub release](https://github.com/vgate-project). Download, run, and
+point the frontends at your manager via `env.js` (no build step). See
+[Releases (Pre-built)](/operations/releases).
+:::
 
 ::: tip New here?
 Read [What is VGate?](/guide/what-is-vgate) for the big picture, then jump to
