@@ -4,6 +4,8 @@
 subscribe to plans, and view their subscription and usage. It talks to the manager's REST API
 under `/api/v1`.
 
+Source: [github.com/vgate-project/vgate-user](https://github.com/vgate-project/vgate-user)
+
 ## Stack
 
 Vue 3 + Vite + TypeScript, with Element Plus, Pinia, Vue Router, and Axios. Node 18+ required.

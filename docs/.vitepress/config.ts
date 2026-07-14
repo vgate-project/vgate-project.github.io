@@ -7,7 +7,7 @@ export default defineConfig({
   description:
     'VGate is a self-hosted, open-source VLESS proxy management system. Manage proxy nodes, users, subscriptions, billing, and traffic in one place.',
 
-  // Base path for GitHub Pages project sites: https://<user>.github.io/
+  // Served as a GitHub Pages org/user site at the root: https://vgate-project.github.io/
   base: '/',
 
   lastUpdated: true,
@@ -33,6 +33,7 @@ export default defineConfig({
       {
         text: 'Components',
         items: [
+          { text: 'Overview', link: '/components/' },
           { text: 'Manager (Backend API)', link: '/components/manager' },
           { text: 'Server (Proxy Node)', link: '/components/server' },
           { text: 'Admin Console', link: '/components/admin-console' },

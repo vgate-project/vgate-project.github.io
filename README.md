@@ -6,6 +6,10 @@ This site is built with [VitePress](https://vitepress.dev) and is published to G
 
 > https://vgate-project.github.io/
 
+The source lives in the [`vgate-project/vgate-project.github.io`](https://github.com/vgate-project/vgate-project.github.io)
+repository. VGate's code (manager, server, admin console, user portal) is hosted under the
+[`vgate-project`](https://github.com/vgate-project) GitHub organization.
+
 ## Repository layout
 
 ```
@@ -46,8 +50,9 @@ npm run docs:preview   # serve the built site locally
 
 ## Deploying to GitHub Pages
 
-The site is configured with `base: '/'` so it works under the
-project sub-path. Build the site and publish the contents of `docs/.vitepress/dist`:
+The site is configured with `base: '/'` so it is served at the GitHub Pages org root
+(`https://vgate-project.github.io/`). Build the site and publish the contents of
+`docs/.vitepress/dist`:
 
 ```bash
 npm run docs:build

@@ -51,7 +51,9 @@ a clean REST API, so you can replace or white-label the portal freely.
 ### How do I deploy to GitHub Pages?
 
 This site itself is built with VitePress and deployed via the workflow in
-`.github/workflows/deploy.yml`. The `base` is set to `/vgate-project.github.io/`.
+`.github/workflows/deploy.yml`. The `base` is set to `/`, since the docs live in the
+`vgate-project.github.io` repository and are served at the GitHub Pages org root
+(`https://vgate-project.github.io/`).
 
 ### What license is VGate under?
 

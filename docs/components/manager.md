@@ -4,6 +4,8 @@ The `manager/` component is the control plane: a Go service (Gin + GORM) that ow
 plans, orders, traffic, and system config, and exposes both the human-facing REST API and the
 node data plane.
 
+Source: [github.com/vgate-project/vgate-manager](https://github.com/vgate-project/vgate-manager)
+
 ## Build & run
 
 ```bash

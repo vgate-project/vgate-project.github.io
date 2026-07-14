@@ -4,6 +4,8 @@ The `server/` component is a Go binary (cobra CLI) that runs a single VLESS inbo
 It is a **stateless worker**: it pulls its configuration and authorized user list from the
 manager, serves proxy traffic, and reports per-user traffic back.
 
+Source: [github.com/vgate-project/vgate-server](https://github.com/vgate-project/vgate-server)
+
 ## Build & run
 
 ```bash

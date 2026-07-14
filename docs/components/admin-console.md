@@ -3,6 +3,8 @@
 `frontend/admin/` is the Vue 3 web UI operators use to run VGate day to day. It talks to the
 manager's REST API under `/api/v1`.
 
+Source: [github.com/vgate-project/vgate-admin](https://github.com/vgate-project/vgate-admin)
+
 ## Stack
 
 Vue 3 + Vite + TypeScript, with Element Plus, Pinia, Vue Router, and Axios. Node 18+ required.

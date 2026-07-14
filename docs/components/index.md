@@ -4,12 +4,20 @@ VGate ships as four independently-buildable components. There is **no monorepo b
 built, tested, and linted from within its own directory. They communicate over the manager's
 REST API.
 
-| Component | Directory | Stack | Builds to |
+All components are hosted under the [`vgate-project`](https://github.com/vgate-project) GitHub
+organization:
+
+- **Manager** — [github.com/vgate-project/vgate-manager](https://github.com/vgate-project/vgate-manager)
+- **Server** — [github.com/vgate-project/vgate-server](https://github.com/vgate-project/vgate-server)
+- **Admin Console** — [github.com/vgate-project/vgate-admin](https://github.com/vgate-project/vgate-admin)
+- **User Portal** — [github.com/vgate-project/vgate-user](https://github.com/vgate-project/vgate-user)
+
+| Component | Repository | Stack | Builds to |
 | --- | --- | --- | --- |
-| Manager | `manager/` | Go 1.26 · Gin + GORM | `vgate-manager` binary |
-| Server | `server/` | Go 1.26 · xray-core | `vgate` binary |
-| Admin Console | `frontend/admin/` | Vue 3 · Vite · TS | static `dist/` |
-| User Portal | `frontend/user/` | Vue 3 · Vite · TS | static `dist/` |
+| Manager | `vgate-manager` | Go 1.26 · Gin + GORM | `vgate-manager` binary |
+| Server | `vgate-server` | Go 1.26 · xray-core | `vgate` binary |
+| Admin Console | `vgate-admin` | Vue 3 · Vite · TS | static `dist/` |
+| User Portal | `vgate-user` | Vue 3 · Vite · TS | static `dist/` |
 
 ## Dependencies between components
 
