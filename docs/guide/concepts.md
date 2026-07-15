@@ -57,9 +57,9 @@ restart.
 
 ## Roles
 
-| Role | Capabilities |
-| --- | --- |
-| `admin` | Manage nodes, users, traffic, stats, orders, system config. |
+| Role          | Capabilities                                                       |
+|---------------|--------------------------------------------------------------------|
+| `admin`       | Manage nodes, users, traffic, stats, orders, system config.        |
 | `super_admin` | Everything `admin` can do, **plus** manage plans and other admins. |
 
 ## Auth domains

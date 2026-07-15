@@ -58,12 +58,12 @@ go vet ./... && gofmt -l .
 
 ## API surface (all under `/api/v1`)
 
-| Group | Endpoints |
-| --- | --- |
-| Public / user | `/user/login`, `/sub/:sub_token`, profile / subscribe / plans / orders, `/billing/:platform/notify` (`alipay`, `wechat`, `stripe`) |
-| Node data plane | `GET /server/config`, `GET /server/users`, `POST /server/traffic` |
-| Admin | nodes, users, traffic, stats, system-config, orders, plans, admins |
-| Health | `GET /health` |
+| Group           | Endpoints                                                                                                                          |
+|-----------------|------------------------------------------------------------------------------------------------------------------------------------|
+| Public / user   | `/user/login`, `/sub/:sub_token`, profile / subscribe / plans / orders, `/billing/:platform/notify` (`alipay`, `wechat`, `stripe`) |
+| Node data plane | `GET /server/config`, `GET /server/users`, `POST /server/traffic`                                                                  |
+| Admin           | nodes, users, traffic, stats, system-config, orders, plans, admins                                                                 |
+| Health          | `GET /health`                                                                                                                      |
 
 ## Auth
 
@@ -74,12 +74,12 @@ go vet ./... && gofmt -l .
 
 ## Config split
 
-| File / env only | DB-backed (hot-reloadable) |
-| --- | --- |
-| `server.port` | `jwt` TTLs |
-| `db.*` | `log.level` / `log.format` |
-| `jwt.secret` | `cors.allowed_origins` |
-| `admin.bootstrap.*` | timeouts |
+| File / env only     | DB-backed (hot-reloadable) |
+|---------------------|----------------------------|
+| `server.port`       | `jwt` TTLs                 |
+| `db.*`              | `log.level` / `log.format` |
+| `jwt.secret`        | `cors.allowed_origins`     |
+| `admin.bootstrap.*` | timeouts                   |
 
 viper maps `SERVER_PORT`-style env vars. See [Configuration Reference](../operations/configuration).
 

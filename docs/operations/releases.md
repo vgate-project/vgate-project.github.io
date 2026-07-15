@@ -4,12 +4,12 @@ Every VGate component publishes **pre-built artifacts** to its GitHub release un
 [`vgate-project`](https://github.com/vgate-project) organization — you do **not** need to build
 from source (or build Docker images) to run VGate.
 
-| Component | Repository | Pre-built artifacts |
-| --- | --- | --- |
-| Manager | [vgate-project/vgate-manager](https://github.com/vgate-project/vgate-manager) | `vgate-manager-<os>-<arch>.tar.gz` / `.zip`, Docker image |
-| Server | [vgate-project/vgate-server](https://github.com/vgate-project/vgate-server) | `vgate-server-<os>-<arch>.tar.gz` / `.zip`, Docker image |
-| Admin Console | [vgate-project/vgate-admin](https://github.com/vgate-project/vgate-admin) | `dist.tar.gz` / `dist.zip` (built SPA) |
-| User Portal | [vgate-project/vgate-user](https://github.com/vgate-project/vgate-user) | `dist.tar.gz` / `dist.zip` (built SPA) |
+| Component     | Repository                                                                    | Pre-built artifacts                                       |
+|---------------|-------------------------------------------------------------------------------|-----------------------------------------------------------|
+| Manager       | [vgate-project/vgate-manager](https://github.com/vgate-project/vgate-manager) | `vgate-manager-<os>-<arch>.tar.gz` / `.zip`, Docker image |
+| Server        | [vgate-project/vgate-server](https://github.com/vgate-project/vgate-server)   | `vgate-server-<os>-<arch>.tar.gz` / `.zip`, Docker image  |
+| Admin Console | [vgate-project/vgate-admin](https://github.com/vgate-project/vgate-admin)     | `dist.tar.gz` / `dist.zip` (built SPA)                    |
+| User Portal   | [vgate-project/vgate-user](https://github.com/vgate-project/vgate-user)       | `dist.tar.gz` / `dist.zip` (built SPA)                    |
 
 Binaries are built for **linux/darwin × amd64/arm64**. Docker images live on GHCR:
 `ghcr.io/vgate-project/vgate-manager` and `ghcr.io/vgate-project/vgate-server`.
@@ -85,7 +85,7 @@ The archive extracts into the `dist/` directory; edit `dist/env.js` there. Set t
 ```js
 // dist/env.js
 window.__ENV__ = {
-  API_BASE_URL: ''   // or the full manager API origin, see below
+    API_BASE_URL: ''   // or the full manager API origin, see below
 }
 ```
 

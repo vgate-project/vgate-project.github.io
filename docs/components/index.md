@@ -12,12 +12,12 @@ organization:
 - **Admin Console** — [github.com/vgate-project/vgate-admin](https://github.com/vgate-project/vgate-admin)
 - **User Portal** — [github.com/vgate-project/vgate-user](https://github.com/vgate-project/vgate-user)
 
-| Component | Repository | Stack | Builds to |
-| --- | --- | --- | --- |
-| Manager | `vgate-manager` | Go 1.26 · Gin + GORM | `vgate-manager` binary |
-| Server | `vgate-server` | Go 1.26 · xray-core | `vgate` binary |
-| Admin Console | `vgate-admin` | Vue 3 · Vite · TS | static `dist/` |
-| User Portal | `vgate-user` | Vue 3 · Vite · TS | static `dist/` |
+| Component     | Repository      | Stack                | Builds to              |
+|---------------|-----------------|----------------------|------------------------|
+| Manager       | `vgate-manager` | Go 1.26 · Gin + GORM | `vgate-manager` binary |
+| Server        | `vgate-server`  | Go 1.26 · xray-core  | `vgate` binary         |
+| Admin Console | `vgate-admin`   | Vue 3 · Vite · TS    | static `dist/`         |
+| User Portal   | `vgate-user`    | Vue 3 · Vite · TS    | static `dist/`         |
 
 ## Dependencies between components
 

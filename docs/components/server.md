@@ -71,16 +71,16 @@ TLS/Reality protobuf builders). Transports are registered through anonymous impo
 
 ## Inbound internals (`proxy/vless/`)
 
-| File | Responsibility |
-| --- | --- |
-| `handler.go` | VLESS handshake + TCP/UDP forwarder |
-| `udp.go` | UDP-over-TCP relay |
-| `vision.go` | `xtls-rprx-vision` relay (xray-core leaf) |
-| `mux.go` | TCP / HTTP / WebSocket mux handling |
-| `protocol.go` | VLESS protocol constants / helpers |
-| `user.go` | User set + connection tracking |
-| `traffic.go` | Per-user delta traffic counters |
-| `server.go` | Lifecycle + hot-reload |
+| File          | Responsibility                            |
+|---------------|-------------------------------------------|
+| `handler.go`  | VLESS handshake + TCP/UDP forwarder       |
+| `udp.go`      | UDP-over-TCP relay                        |
+| `vision.go`   | `xtls-rprx-vision` relay (xray-core leaf) |
+| `mux.go`      | TCP / HTTP / WebSocket mux handling       |
+| `protocol.go` | VLESS protocol constants / helpers        |
+| `user.go`     | User set + connection tracking            |
+| `traffic.go`  | Per-user delta traffic counters           |
+| `server.go`   | Lifecycle + hot-reload                    |
 
 ## Sizing & deployment
 

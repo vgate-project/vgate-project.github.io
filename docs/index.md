@@ -62,16 +62,16 @@ traffic?"*. VGate collapses all of that into one coherent system you host yourse
       Admin operator --> │   Admin Console (Vue)   │
                          └───────────┬─────────────┘
                                      │  REST /api/v1
-                         ┌───────────▼─────────────┐
+                         ┌───────────▼──────────────┐
    Users (portal/apps) ->│      Manager (backend)   │◄-- Node token auth
                          │  API · Auth · Billing    │        per-user traffic
                          │  Plans · Traffic · Nodes │            reports
-                         └───────────┬─────────────┘
+                         └───────────┬──────────────┘
                                      │  REST /api/v1/server/*
-                         ┌───────────▼─────────────┐
+                         ┌───────────▼──────────────┐
       Internet clients ->│  Server (VLESS inbound)  │
                          │  TCP · WS · xhttp · VLESS│
-                         └─────────────────────────┘
+                         └──────────────────────────┘
 ```
 
 ## Gallery

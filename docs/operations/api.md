@@ -5,11 +5,11 @@ API**, the **node data plane**, and the **admin API**.
 
 ## Authentication
 
-| Surface | Mechanism |
-| --- | --- |
+| Surface                        | Mechanism                                                           |
+|--------------------------------|---------------------------------------------------------------------|
 | User API (`/user/*`, `/sub/*`) | User **JWT** (access + refresh; not refreshable in the user portal) |
-| Admin API (`/admin/*`) | Admin **JWT** (access + refresh; one silent refresh on 401) |
-| Node data plane (`/server/*`) | **Node token** (`node_auth` middleware) |
+| Admin API (`/admin/*`)         | Admin **JWT** (access + refresh; one silent refresh on 401)         |
+| Node data plane (`/server/*`)  | **Node token** (`node_auth` middleware)                             |
 
 ## Health
 

@@ -8,18 +8,18 @@ VGate is a small distributed system with a clear control-plane / data-plane spli
 ┌──────────────────┐         REST /api/v1         ┌──────────────────────────┐
 │  Admin Console   │ ───────────────────────────► │                          │
 │  (Vue 3, ops)    │                              │      Manager (Go)        │
-└──────────────────┘                              │  ┌────────────────────┐   │
-                                                  │  │ API / middleware   │   │
-┌──────────────────┐         REST /api/v1        │  │ Auth (JWT, roles)  │   │
-│  User Portal     │ ───────────────────────────► │  │ Billing / orders   │   │
-│  (Vue 3, users)  │                              │  │ Plans / users      │   │
-└──────────────────┘                              │  │ Traffic aggregator │   │
-                                                  │  │ Nodes / system cfg │   │
-┌──────────────────┐    REST /api/v1/server/*    │  └─────────┬──────────┘   │
-│  Server (VLESS)  │ ◄───────────────────────────┤     GORM  │ DB             │
-│  sync + report   │ ───────────────────────────► │  ┌───────▼─────────────┐  │
-│                  │   per-user traffic reports    │  │ SQLite / Postgres   │  │
-└────────┬─────────┘                              │  └─────────────────────┘  │
+└──────────────────┘                              │  ┌────────────────────┐  │
+                                                  │  │ API / middleware   │  │
+┌──────────────────┐         REST /api/v1         │  │ Auth (JWT, roles)  │  │
+│  User Portal     │ ───────────────────────────► │  │ Billing / orders   │  │
+│  (Vue 3, users)  │                              │  │ Plans / users      │  │
+└──────────────────┘                              │  │ Traffic aggregator │  │
+                                                  │  │ Nodes / system cfg │  │
+┌──────────────────┐    REST /api/v1/server/*     │  └─────────┬──────────┘  │
+│  Server (VLESS)  │ ◄────────────────────────────┤     GORM  │ DB           │
+│  sync + report   │ ───────────────────────────► │  ┌───────▼─────────────┐ │
+│                  │   per-user traffic reports   │  │ SQLite / Postgres   │ │
+└────────┬─────────┘                              │  └─────────────────────┘ │
          │ VLESS inbound                          └──────────────────────────┘
          ▼
    Internet clients (VLESS apps)
@@ -60,12 +60,12 @@ VGate is a small distributed system with a clear control-plane / data-plane spli
 
 Some keys are file/env-only; others are DB-backed and hot-reloadable:
 
-| File / env only | DB-backed (hot-reloadable) |
-| --- | --- |
-| `server.port` | `jwt` TTLs |
-| `db.*` | `log.level` / `log.format` |
-| `jwt.secret` | `cors.allowed_origins` |
-| `admin.bootstrap.*` | timeouts |
+| File / env only     | DB-backed (hot-reloadable) |
+|---------------------|----------------------------|
+| `server.port`       | `jwt` TTLs                 |
+| `db.*`              | `log.level` / `log.format` |
+| `jwt.secret`        | `cors.allowed_origins`     |
+| `admin.bootstrap.*` | timeouts                   |
 
 viper maps `SERVER_PORT`-style environment variables.
 
