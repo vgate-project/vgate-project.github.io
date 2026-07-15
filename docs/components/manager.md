@@ -60,7 +60,7 @@ go vet ./... && gofmt -l .
 
 | Group | Endpoints |
 | --- | --- |
-| Public / user | `/user/login`, `/sub/:sub_token`, profile / subscribe / plans / orders, `/billing/alipay/notify` |
+| Public / user | `/user/login`, `/sub/:sub_token`, profile / subscribe / plans / orders, `/billing/:platform/notify` (`alipay`, `wechat`, `stripe`) |
 | Node data plane | `GET /server/config`, `GET /server/users`, `POST /server/traffic` |
 | Admin | nodes, users, traffic, stats, system-config, orders, plans, admins |
 | Health | `GET /health` |

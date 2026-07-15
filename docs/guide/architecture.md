@@ -51,7 +51,7 @@ VGate is a small distributed system with a clear control-plane / data-plane spli
 ### API surface (all under `/api/v1`)
 
 - **Public / user**: `/user/login`, `/sub/:sub_token`, profile / subscribe / plans / orders,
-  `/billing/alipay/notify`.
+  `/billing/:platform/notify` (`alipay`, `wechat`, `stripe`).
 - **Node data plane**: `GET /server/config`, `GET /server/users`, `POST /server/traffic`.
 - **Admin**: nodes, users, traffic, stats, system-config, orders, plans, admins.
 - `GET /health`.

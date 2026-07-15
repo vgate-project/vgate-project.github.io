@@ -31,7 +31,7 @@ features:
     details: Create users, assign subscription plans with quotas and expiry, and generate standard subscription links the user portal and client apps can consume directly.
   - icon: 💳
     title: Built-in Billing
-    details: Orders, plans, and an Alipay notify endpoint are part of the manager. Close expired orders automatically and reset quotas on a schedule.
+    details: Orders, plans, and multi-gateway payments (Alipay / WeChat Pay / Stripe) are part of the manager. Close expired orders automatically and reset quotas on a schedule.
   - icon: 📊
     title: Per-user Traffic Accounting
     details: Proxy nodes report accumulated per-user traffic back to the manager, which aggregates it hourly and enforces daily quotas.

@@ -3,6 +3,13 @@
 This is a living document of where VGate is headed. Items are indicative and may change — see the
 [GitHub project](https://github.com/vgate-project) for the authoritative issue tracker.
 
+## Recently shipped
+
+- **Multi-gateway payments** — Alipay, WeChat Pay (NATIVE QR), and Stripe (Checkout) gateways,
+  configured via the admin System Config page and wired through a unified payment abstraction
+  (`internal/payment`). Orders carry a `pay_mode` (`qr` for WeChat, `redirect` for Alipay/Stripe)
+  that drives the checkout UI.
+
 ## Now (current focus)
 
 - Stabilize the four-component system: manager, server, admin console, user portal.
@@ -16,7 +23,6 @@ This is a living document of where VGate is headed. Items are indicative and may
 - **Observability** — richer metrics and dashboards for per-node and per-user traffic.
 - **Admin UX** — node health status, sync-lag indicators, and bulk user operations in the admin
   console.
-- **Billing breadth** — additional payment providers beyond the Alipay notify endpoint.
 
 ## Later
 

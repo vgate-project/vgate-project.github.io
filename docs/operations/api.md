@@ -41,7 +41,7 @@ GET  /api/v1/user/profile                            # current user profile
 GET  /api/v1/user/subscribe                          # subscription status
 GET  /api/v1/user/plans                              # available plans
 GET  /api/v1/user/orders                             # user's orders
-POST /api/v1/billing/alipay/notify                   # Alipay payment notify (closes order)
+POST /api/v1/billing/:platform/notify              # payment notify (alipay|wechat|stripe; closes order)
 ```
 
 ## Admin API
@@ -83,5 +83,5 @@ curl -H "Authorization: Bearer $NODE_TOKEN" \
 
 ## Rate limiting
 
-`ratelimit` middleware is available; enable it for public endpoints (e.g., login, Alipay notify)
+`ratelimit` middleware is available; enable it for public endpoints (e.g., login, payment notify)
 in production.

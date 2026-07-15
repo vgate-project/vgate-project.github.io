@@ -34,7 +34,7 @@ created by `super_admin`s.
 ## Order
 
 A billing record tying a user to a plan, with a payment state. Orders are closed on payment
-(Alipay notify) or by the expired-order closer.
+(payment gateway notify) or by the expired-order closer.
 
 ## Subscription
 

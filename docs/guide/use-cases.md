@@ -8,8 +8,8 @@ The most common scenario. You operate proxy nodes in one or more regions and wan
 access**:
 
 - Define **plans** (e.g., "Starter 100 GB / 30 days", "Pro 1 TB / 30 days").
-- Customers sign up in the **user portal**, place an **order**, and pay (Alipay notify closes
-  the order).
+- Customers sign up in the **user portal**, place an **order**, and pay (the payment gateway's
+  async notify closes the order).
 - Each customer gets a **subscription link** they paste into a VLESS client.
 - **Per-user traffic** is tracked and **daily quotas** are enforced automatically.
 - The **expired-order closer** revokes access when a plan lapses.

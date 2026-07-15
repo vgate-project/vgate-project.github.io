@@ -43,7 +43,7 @@ When the manager and a frontend run on different origins, add the frontend origi
 ## Rate limiting
 
 Enable the `ratelimit` middleware for public endpoints — especially `/user/login` and
-`/billing/alipay/notify` — to blunt brute force and abuse.
+`/billing/:platform/notify` (`alipay`, `wechat`, `stripe`) — to blunt brute force and abuse.
 
 ## User portal hardening
 

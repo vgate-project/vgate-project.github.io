@@ -57,7 +57,7 @@ across the fleet with no SSH and no restarts.
 ## Billing
 
 - **Orders** and **plans** are first-class resources in the manager.
-- An **Alipay notify** endpoint (`/billing/alipay/notify`) closes orders on payment.
+- A **payment notify** endpoint (`/api/v1/billing/:platform/notify`) closes orders on payment for Alipay, WeChat Pay, and Stripe.
 - An expired-order closer runs every 5 minutes.
 
 ## Traffic accounting
