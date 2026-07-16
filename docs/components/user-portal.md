@@ -50,7 +50,7 @@ See `vgate-user/README.md` for the full route list and details.
 - View their profile and current subscription.
 - Browse plans and place orders.
 - Copy their **subscription link** (`/sub/:sub_token`) into a VLESS client.
-- View their traffic usage against their plan quota.
+- View their traffic usage against their plan quota and their effective speed cap on the dashboard.
 
 ## API base URL
 

@@ -35,6 +35,9 @@ features:
   - icon: 📊
     title: Per-user Traffic Accounting
     details: Proxy nodes report accumulated per-user traffic back to the manager, which aggregates it hourly and enforces daily quotas.
+  - icon: 🚦
+    title: Per-user & Node Speed Limits
+    details: Cap throughput per user and per node (upload/download, bytes/sec). The node enforces it locally with token buckets; editing a plan re-applies its limits to all its subscribers.
   - icon: 🖥️
     title: Two Polished Frontends
     details: A Vue 3 admin console for operators and a Vue 3 user portal for customers — both talking to the same manager REST API.

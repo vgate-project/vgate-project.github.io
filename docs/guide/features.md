@@ -67,6 +67,19 @@ across the fleet with no SSH and no restarts.
 - The manager aggregates traffic **hourly** and enforces **daily quotas**.
 - Admins can view traffic stats per user and per node.
 
+## Speed limiting
+
+Nodes, plans, and users can carry upload/download speed caps (bytes/sec, `0` = unlimited):
+
+- **Per-node (global)** caps the node's aggregate throughput.
+- **Per-plan** caps every user on that plan; editing a plan re-applies its caps to all current subscribers.
+- **Per-user** overrides cap an individual user (effective rate is the minimum of the node-global and per-user limits).
+
+The `vgate-server` node enforces the limits locally with token buckets
+(`golang.org/x/time/rate`) on both the counting connection and the xtls-rprx-vision path.
+The manager stores the caps and delivers them via the node config and the per-user
+`GET /server/users` payload.
+
 ## Two frontends
 
 - **Admin Console** — manage nodes, users, plans, orders, traffic, announcements, and

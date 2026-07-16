@@ -38,9 +38,9 @@ nothing to run with `npm test`.
 ## What you can do
 
 - **Nodes**: create/edit proxy nodes, set their listen port, transport (`tcp`/`ws`/`xhttp`),
-  and TLS/Reality security — all delivered to the node via the manager.
-- **Users**: create users, assign plans, revoke credentials.
-- **Plans**: define purchasable plans (price, quota, duration). Gated to `super_admin`.
+  TLS/Reality security, and per-node upload/download speed limits — all delivered to the node via the manager.
+- **Users**: create users, assign plans, revoke credentials, and set per-user speed limits.
+- **Plans**: define purchasable plans (price, quota, duration) and per-plan speed caps. Gated to `super_admin`.
 - **Orders**: view and manage billing orders.
 - **Traffic**: inspect per-user and per-node usage and stats.
 - **System config**: tune hot-reloadable settings (JWT TTLs, log level/format, CORS origins,

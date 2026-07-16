@@ -71,16 +71,29 @@ TLS/Reality protobuf builders). Transports are registered through anonymous impo
 
 ## Inbound internals (`proxy/vless/`)
 
-| File          | Responsibility                            |
-|---------------|-------------------------------------------|
-| `handler.go`  | VLESS handshake + TCP/UDP forwarder       |
-| `udp.go`      | UDP-over-TCP relay                        |
-| `vision.go`   | `xtls-rprx-vision` relay (xray-core leaf) |
-| `mux.go`      | TCP / HTTP / WebSocket mux handling       |
-| `protocol.go` | VLESS protocol constants / helpers        |
-| `user.go`     | User set + connection tracking            |
-| `traffic.go`  | Per-user delta traffic counters           |
-| `server.go`   | Lifecycle + hot-reload                    |
+| File           | Responsibility                                        |
+|----------------|-------------------------------------------------------|
+| `handler.go`   | VLESS handshake + TCP/UDP forwarder                   |
+| `udp.go`       | UDP-over-TCP relay                                    |
+| `vision.go`    | `xtls-rprx-vision` relay (xray-core leaf)             |
+| `mux.go`       | TCP / HTTP / WebSocket mux handling                   |
+| `protocol.go`  | VLESS protocol constants / helpers                    |
+| `user.go`      | User set + connection tracking                        |
+| `traffic.go`   | Per-user delta traffic counters                       |
+| `ratelimit.go` | Per-user + node-global speed limiting (token buckets) |
+| `server.go`    | Lifecycle + hot-reload                                |
+
+## Speed limiting
+
+A node can cap throughput in both directions, enforced locally with token buckets
+(`golang.org/x/time/rate`):
+
+- **Node-global** limits (`speed_limit_up_bps` / `speed_limit_down_bps`) cap the node's aggregate throughput.
+- **Per-user** limits (carried on each user in the `GET /server/users` payload) cap a single user.
+
+The effective rate for a user is the **minimum** of the node-global and per-user limits; `0` means
+unlimited. The limiter is applied to both the counting connection and the xtls-rprx-vision path.
+See `proxy/vless/ratelimit.go`.
 
 ## Sizing & deployment
 

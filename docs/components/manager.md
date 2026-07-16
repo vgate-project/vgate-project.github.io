@@ -1,8 +1,8 @@
 # Manager (Backend API)
 
 The `vgate-manager/` component is the control plane: a Go service (Gin + GORM) that owns users, nodes,
-plans, orders, traffic, and system config, and exposes both the human-facing REST API and the
-node data plane.
+plans, orders, traffic, and system config — including per-user and per-node speed caps — and exposes
+both the human-facing REST API and the node data plane.
 
 Source: [github.com/vgate-project/vgate-manager](https://github.com/vgate-project/vgate-manager)
 

@@ -25,12 +25,12 @@ VGate replaces that with a **control plane + reporting data plane** model:
 
 ## The four building blocks
 
-| Component         | Language / Stack     | Role                                                                             |
-|-------------------|----------------------|----------------------------------------------------------------------------------|
-| **Manager**       | Go (Gin + GORM)      | Backend API: admin, identity, billing, and the node data plane.                  |
-| **Server**        | Go (xray-core based) | VLESS inbound proxy node. Syncs from the manager, serves traffic, reports usage. |
-| **Admin Console** | Vue 3 + Vite + TS    | Web UI for operators: nodes, users, plans, orders, traffic, stats.               |
-| **User Portal**   | Vue 3 + Vite + TS    | Web UI for customers: login, profile, subscription, plan purchase.               |
+| Component         | Language / Stack     | Role                                                                                                       |
+|-------------------|----------------------|------------------------------------------------------------------------------------------------------------|
+| **Manager**       | Go (Gin + GORM)      | Backend API: admin, identity, billing, and the node data plane.                                            |
+| **Server**        | Go (xray-core based) | VLESS inbound proxy node. Syncs from the manager, serves (optionally rate-limited) traffic, reports usage. |
+| **Admin Console** | Vue 3 + Vite + TS    | Web UI for operators: nodes, users, plans, orders, traffic, stats.                                         |
+| **User Portal**   | Vue 3 + Vite + TS    | Web UI for customers: login, profile, subscription, plan purchase.                                         |
 
 All three components are independently buildable and live as siblings under the repository root.
 There is **no monorepo build** — you build, test, and lint each from within its own directory.
