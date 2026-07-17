@@ -92,6 +92,31 @@ proxies `/api` → `http://localhost:8081` to avoid CORS. The API base URL is re
 `window.__ENV__.API_BASE_URL` (injected by `public/env.js`), so you can repoint the backend
 after deploy without rebuilding.
 
+## Telegram integration
+
+The manager can run a Telegram bot for alerts, announcements, and per-account ticket
+notifications. It is configured through DB-backed `telegram.*` system-config keys
+(`enabled`, `bot_token`, `bot_username`, `user_bot_enabled`, and the `alert_*` toggles).
+
+- Users and admins bind a personal account via a `/start <code>` deep link. The code's `u_`
+  (user) or `a_` (admin) prefix routes the bind to the right account — admins link from **Settings
+  → Telegram** in the admin console, users from **Settings** in the portal.
+- Linked users and admins can receive ticket replies and forwarded announcements over Telegram.
+- Admins can broadcast a message to every linked user (optionally also published as an
+  announcement).
+
+## Support tickets
+
+Tickets are a lightweight support channel between users and admins:
+
+- **Users** open tickets, reply to admin responses, and close their own ticket. When opening a
+  ticket they choose how they're notified of replies (`none` / `email` / `telegram`), defaulting to
+  `telegram` when their account is Telegram-linked, else `none`.
+- **Admins** list and view all tickets, reply, and move each through the status machine
+  `open → in_progress → resolved → closed`. A later user reply reopens a closed ticket.
+- When an admin replies, the ticket owner is notified via the method they chose, and every admin
+  with a linked Telegram account gets an alert on new tickets and replies.
+
 ## Observability & ops
 
 - Structured logging with configurable `log.level` / `log.format`.

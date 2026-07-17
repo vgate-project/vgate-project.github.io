@@ -41,6 +41,12 @@ features:
   - icon: 🖥️
     title: Two Polished Frontends
     details: A Vue 3 admin console for operators and a Vue 3 user portal for customers — both talking to the same manager REST API.
+  - icon: 📨
+    title: Telegram Alerts & Broadcast
+    details: Run a Telegram bot for admin ticket alerts and operator broadcasts. Users and admins self-bind via a /start deep link; per-ticket notifications can go to Telegram or email.
+  - icon: 🎫
+    title: Support Tickets
+    details: A built-in ticket channel between users and admins. Users open, reply to, and close their own tickets; admins manage the queue through a status workflow (open → in_progress → resolved → closed).
 
 ---
 

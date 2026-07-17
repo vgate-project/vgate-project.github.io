@@ -40,7 +40,8 @@ go vet ./... && gofmt -l .
 - `middleware/` — `cors.go`, `jwt.go` (user/admin auth), `node_auth.go` (node token auth),
   `logger.go`, `ratelimit.go`.
 - `service/` — business logic: auth, user, node, plan, order/billing, traffic, stats,
-  subscription, system_config, email/invite, announcement. Many have `_test.go`.
+  subscription, system_config, email/invite, announcement, telegram, ticket. Many have
+  `_test.go`.
 - `model/` — GORM models. `util/` — helpers. `wire/` — dependency wiring.
   `pkg/crypto/` — shared crypto (VLESS credential helpers).
 
@@ -60,9 +61,9 @@ go vet ./... && gofmt -l .
 
 | Group           | Endpoints                                                                                                                          |
 |-----------------|------------------------------------------------------------------------------------------------------------------------------------|
-| Public / user   | `/user/login`, `/sub/:sub_token`, profile / subscribe / plans / orders, `/billing/:platform/notify` (`alipay`, `wechat`, `stripe`) |
+| Public / user   | `/user/login`, `/sub/:sub_token`, profile / subscribe / plans / orders, `/billing/:platform/notify` (`alipay`, `wechat`, `stripe`), support tickets, self-service Telegram link |
 | Node data plane | `GET /server/config`, `GET /server/users`, `POST /server/traffic`                                                                  |
-| Admin           | nodes, users, traffic, stats, system-config, orders, plans, admins                                                                 |
+| Admin           | nodes, users, traffic, stats, system-config, orders, plans, admins, tickets, Telegram broadcast/admin-link                          |
 | Health          | `GET /health`                                                                                                                      |
 
 ## Auth
@@ -71,6 +72,45 @@ go vet ./... && gofmt -l .
   **one automatic refresh**.
 - **Roles**: `admin` vs `super_admin` gate plan/admins endpoints.
 - **Node endpoints** use a separate **node token** (`node_auth` middleware).
+
+## Telegram & notifications
+
+The manager can run a Telegram bot that delivers alerts and announcements and lets users and
+admins bind their personal accounts for ticket notifications. It is enabled and configured via
+DB-backed system config (`TelegramConfig`):
+
+| Key                           | Default  | Meaning                                                       |
+|-------------------------------|----------|---------------------------------------------------------------|
+| `telegram.enabled`            | `false`  | Master switch for the bot.                                    |
+| `telegram.bot_token`          | `""`     | BotFather token (secret).                                    |
+| `telegram.bot_username`       | `""`     | Bot `@username`, used to build `/start` deep links.          |
+| `telegram.user_bot_enabled`   | `false`  | Allow users to self-bind via deep link.                     |
+| `telegram.alert_ticket`       | `false`  | Notify linked admins on new tickets / user replies.         |
+| `telegram.alert_announcement` | `false`  | Forward announcements to linked users.                      |
+| `telegram.alert_order_paid`   | `false`  | Notify on paid orders (and other alert toggles).            |
+
+Binding uses a `/start <code>` deep link. The code carries a `u_` (user) or `a_` (admin) prefix
+so the bot routes the bind to the right account: admins link from **Settings → Telegram** in the
+admin console, users from **Settings** in the portal.
+
+When an admin replies to a ticket, the owner is notified on the channel they chose when opening it
+(`none` / `email` / `telegram`). Every admin with a linked Telegram account also receives an alert
+on each new ticket and user reply.
+
+## Support tickets
+
+Tickets are a lightweight support channel between users and admins.
+
+- **Users** open tickets (`POST /user/tickets`), reply, and can **close their own ticket**
+  (`POST /user/tickets/:id/close`). When opening one they pick a notification method
+  (`notify_method`: `none` | `email` | `telegram`); if omitted it defaults to `telegram` when
+  their account is Telegram-linked, else `none`.
+- **Admins** list/view all tickets, reply (`POST /admin/tickets/:id/messages`), and move them
+  through a status machine `open → in_progress → resolved → closed`
+  (`PUT /admin/tickets/:id/status`). A later user reply reopens a closed ticket.
+
+Admins can also broadcast a message to every linked Telegram user via
+`POST /admin/telegram/broadcast` (optionally also published as an announcement).
 
 ## Config split
 

@@ -51,6 +51,12 @@ See `vgate-user/README.md` for the full route list and details.
 - Browse plans and place orders.
 - Copy their **subscription link** (`/sub/:sub_token`) into a VLESS client.
 - View their traffic usage against their plan quota and their effective speed cap on the dashboard.
+- **Telegram**: bind a personal Telegram account (Settings) for ticket notifications and toggle
+  announcement delivery — only shown when the manager's Telegram bot is enabled and self-binding is
+  allowed.
+- **Support tickets**: open a ticket, reply to admins, and close their own ticket; when opening a
+  ticket they choose how they're notified of replies (`none` / `email` / `telegram`, defaulting to
+  `telegram` when their account is linked).
 
 ## API base URL
 

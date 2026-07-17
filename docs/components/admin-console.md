@@ -46,6 +46,12 @@ nothing to run with `npm test`.
 - **System config**: tune hot-reloadable settings (JWT TTLs, log level/format, CORS origins,
   timeouts) via `PUT /api/v1/admin/system-config`.
 - **Announcements**: publish notices to the user portal.
+- **Telegram**: link your own operator account for ticket notifications, broadcast messages to
+  every linked user, and toggle announcement/alert forwarding (requires the manager's Telegram bot
+  to be enabled).
+- **Tickets**: list and view support tickets from users, reply to them, and move each through the
+  `open → in_progress → resolved → closed` status machine; a later user reply reopens a closed
+  ticket.
 
 ## Auth behavior
 
