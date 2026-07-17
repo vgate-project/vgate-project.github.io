@@ -47,6 +47,9 @@ features:
   - icon: 🎫
     title: Support Tickets
     details: A built-in ticket channel between users and admins. Users open, reply to, and close their own tickets; admins manage the queue through a status workflow (open → in_progress → resolved → closed).
+  - icon: 📧
+    title: Email Verification & Outbound Mail
+    details: Verify new accounts by email over SMTP or Resend. Verification gates purchases and proxy traffic — not login — so users self-serve while you stay in control. Send a test email from the admin console to confirm connectivity before going live.
 
 ---
 
@@ -73,8 +76,8 @@ traffic?"*. VGate collapses all of that into one coherent system you host yourse
                                      │  REST /api/v1
                          ┌───────────▼──────────────┐
    Users (portal/apps) ->│      Manager (backend)   │◄-- Node token auth
-                         │  API · Auth · Billing    │        per-user traffic
-                         │  Plans · Traffic · Nodes │            reports
+                         │  API · Auth · Billing    │    per-user traffic
+                         │  Plans · Traffic · Nodes │    reports
                          └───────────┬──────────────┘
                                      │  REST /api/v1/server/*
                          ┌───────────▼──────────────┐
