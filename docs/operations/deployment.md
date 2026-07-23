@@ -42,7 +42,8 @@ image `ghcr.io/vgate-project/vgate-manager` — see [Releases (Pre-built)](./rel
 - Set a strong `jwt.secret`.
 - Put it behind the reverse proxy; do not expose the manager port directly to the internet
   except for the paths the proxy forwards.
-- Persist the printed bootstrap admin password somewhere safe (it is shown only once).
+- Persist the bootstrap admin password somewhere safe — set it via `admin.bootstrap.password`
+  (the bundled `docker-compose.yml` defaults it to `change-me`).
 
 ## 2. Server nodes
 

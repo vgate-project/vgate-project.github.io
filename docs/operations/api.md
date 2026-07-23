@@ -38,10 +38,15 @@ it as `api.ErrNotModified`.
 POST /api/v1/user/login                              # returns access + refresh JWT
 GET  /api/v1/sub/:sub_token                          # standard subscription link
 GET  /api/v1/user/profile                            # current user profile
+PUT  /api/v1/user/profile                            # update profile
 GET  /api/v1/user/subscribe                          # subscription status
-GET  /api/v1/user/plans                              # available plans
+GET  /api/v1/user/plans                             # available plans
 GET  /api/v1/user/orders                             # user's orders
 POST /api/v1/billing/:platform/notify              # payment notify (alipay|wechat|stripe; closes order)
+POST /api/v1/user/redemption-codes/redeem          # redeem an invite/redemption code
+GET  /api/v1/user/redemption-codes/records         # redemption history
+PUT  /api/v1/user/reminder-channel                  # choose traffic-reminder channel (none/email/telegram)
+GET  /api/v1/user/tickets/unread                    # unread admin-reply count
 ```
 
 ## Admin API
@@ -55,10 +60,16 @@ GET  /api/v1/admin/users                             # list users
 POST /api/v1/admin/users                             # create user
 GET  /api/v1/admin/traffic                           # traffic stats
 GET  /api/v1/admin/stats                             # aggregate stats
-PUT  /api/v1/admin/system-config                     # hot-reloadable settings
+PUT  /api/v1/admin/system-config                     # hot-reloadable settings (super_admin)
 GET  /api/v1/admin/orders                            # orders
+PUT  /api/v1/admin/orders/:id/status                 # update order status
 POST /api/v1/admin/plans                             # create plan (super_admin)
 GET  /api/v1/admin/admins                            # list admins (super_admin)
+GET  /api/v1/admin/redemption-codes                  # list redemption codes
+POST /api/v1/admin/redemption-codes                  # create redemption code
+GET  /api/v1/admin/tickets/unread                    # unread ticket count
+POST /api/v1/admin/users/zombies/preview            # preview zombie users
+POST /api/v1/admin/users/zombies/cleanup            # purge zombie users
 ```
 
 Exact request/response shapes live in `vgate-manager/internal/api/dto/`. The repo's `api/` tests

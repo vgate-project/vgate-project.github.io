@@ -47,6 +47,7 @@ See `vgate-user/README.md` for the full route list and details.
 ## What users can do
 
 - Log in / verify email.
+- Redeem an invite or redemption code from the `/redeem` page.
 - View their profile and current subscription.
 - Browse plans and place orders.
 - Copy their **subscription link** (`/sub/:sub_token`) into a VLESS client.

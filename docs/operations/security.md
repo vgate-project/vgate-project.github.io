@@ -16,8 +16,9 @@ Never reuse a node token as a user/admin credential or vice versa.
 ## Secrets
 
 - Set a strong `jwt.secret` in the manager config. It is used to sign all JWTs.
-- The bootstrap admin password is printed **only once** at first start — store it securely, then
-  rotate by creating a new admin and removing the bootstrap account.
+- Set a strong `admin.bootstrap.password` (the bundled `docker-compose.yml` defaults it to
+  `change-me`) and store it securely; rotate by creating a new admin and removing the bootstrap
+  account.
 - Node tokens are issued per node in the admin console; treat them like API keys.
 
 ## Transport security

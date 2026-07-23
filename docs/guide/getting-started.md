@@ -130,8 +130,8 @@ On first start the manager will:
 
 - auto-migrate the database (SQLite by default),
 - run idempotent data migrations,
-- bootstrap an admin from `admin.bootstrap` (default `admin` / `change-me`),
-- **print the generated admin password once** — copy it now.
+- bootstrap an admin from `admin.bootstrap` (default **username `admin`**; the bundled
+  `docker-compose.yml` sets the password to `change-me`),
 
 The manager listens on `server.port` (default **8081**). Verify with:
 

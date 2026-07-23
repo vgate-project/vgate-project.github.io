@@ -105,6 +105,28 @@ notifications. It is configured through DB-backed `telegram.*` system-config key
 - Admins can broadcast a message to every linked user (optionally also published as an
   announcement).
 
+## Registration, invites & redemption codes
+
+- **Registration modes** (DB-backed `user.*` keys): open registration, invite-gated
+  (`user.register_require_invite`), or restricted to an email-suffix allowlist
+  (`user.register_email_suffix_whitelist`). Email verification gates **purchases and proxy
+  traffic** (not login): an unverified user can browse but cannot order or consume traffic until
+  `email_verified` is true.
+- **Trial accounts** (`user.trial_enabled` + `user.trial_quota_bytes` /
+  `user.trial_duration_days`): new users can be granted a short, capped trial automatically.
+- **Invite codes** (`/admin/invites`): operators issue codes that gate or credit new
+  registrations; `invite.default_user_quota` sets the quota granted to invited users.
+- **Redemption codes** (`/admin/redemption-codes`, redeemed by users at `/redeem`): operators
+  issue codes users apply to claim plans or credit.
+
+## Traffic reminders
+
+DB-backed `reminder.*` keys let the manager notify users when they approach their quota or their
+reset date: `reminder.enabled` (master switch), `reminder.pct_threshold` (e.g. `80` — warn at 80%
+of `quota_bytes`), `reminder.days_threshold` (warn when ≤ N days remain until reset), and
+`reminder.cooldown_days` (minimum gap between reminders per user). Users pick their channel
+(`none` / `email` / `telegram`) via `PUT /api/v1/user/reminder-channel`.
+
 ## Support tickets
 
 Tickets are a lightweight support channel between users and admins:

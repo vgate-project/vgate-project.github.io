@@ -46,6 +46,8 @@ nothing to run with `npm test`.
 - **System config**: tune hot-reloadable settings (JWT TTLs, log level/format, CORS origins,
   timeouts) via `PUT /api/v1/admin/system-config`.
 - **Announcements**: publish notices to the user portal.
+- **Invites**: create and manage invite codes that gate or credit new registrations.
+- **Redemption codes**: issue and track redemption codes that users apply from the portal's `/redeem` page.
 - **Telegram**: link your own operator account for ticket notifications, broadcast messages to
   every linked user, and toggle announcement/alert forwarding (requires the manager's Telegram bot
   to be enabled).

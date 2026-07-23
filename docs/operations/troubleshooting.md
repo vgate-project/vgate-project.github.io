@@ -11,7 +11,8 @@ Common issues and how to diagnose them.
 
 ## Lost the bootstrap admin password
 
-The password is printed **only once** at first start. If you lost it:
+The bootstrap admin password is whatever you set in `admin.bootstrap.password` (the bundled
+`docker-compose.yml` defaults it to `change-me`). If you lost it:
 
 1. Create a new admin via CLI: `vgate-manager admin create --username X --password Y --role super_admin`.
 2. Log in with the new admin and manage/remove the old one.
